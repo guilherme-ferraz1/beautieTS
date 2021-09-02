@@ -1,8 +1,9 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const isEmpty = (value: any) => value === null || value === undefined || value === '';
+const isEmpty = (value: any) =>
+  value === null || value === undefined || value === "";
 
-export const setItem = async (key: string, value: any) => {
+export const setItem = async (key: string, value: unknown): Promise<void> => {
   try {
     if (isEmpty(value)) await AsyncStorage.removeItem(key);
     else await AsyncStorage.setItem(key, JSON.stringify(value));
@@ -11,7 +12,7 @@ export const setItem = async (key: string, value: any) => {
   }
 };
 
-export const getItem = async (key: string) => {
+export const getItem = async (key: string): Promise<string> => {
   if (!isEmpty(key)) {
     try {
       const result = await AsyncStorage.getItem(key);
